@@ -4,14 +4,18 @@ KLIPPER=~/klipper
 MCU_UPDATE=~/mcu-update
 
 update_if_changed() {
-    cmp -s $1 $2 || cp $1 $2
+    if [ -f $2 ]; then
+        cmp -s $1 $2 || cp $1 $2
+    else
+        cp $1 $2
+    fi
 }
 
 build_klipper() {
     local CONFIG_FILE=$1
     cd ${KLIPPER}
-    cp ${MCU_UPDATE}/${CONFIG_FILE} ${KLIPPER}/.config
-    make clean
+    make distclean
+    cp ${MCU_UPDATE}/${CONFIG_FILE} ${KLIPPER}/.config || true
     make menuconfig
     make
     update_if_changed ${KLIPPER}/.config ${MCU_UPDATE}/${CONFIG_FILE}
