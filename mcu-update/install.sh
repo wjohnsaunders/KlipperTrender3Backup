@@ -47,5 +47,8 @@ build_klipper config-sht36-v3
 flash_via_can bdcba9d5a55b
 #flash_via_can 270a34f9f254
 
+echo "Updating mcu - Linux process"
+build_klipper config-linux-process
+
 sudo service klipper start
 
