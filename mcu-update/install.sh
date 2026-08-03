@@ -32,23 +32,29 @@ flash_via_serial() {
     sleep 3
 }
 
-#sudo service klipper stop
+flash_linux() {
+    make flash
+    sleep 3
+}
 
-#echo "Updating mcu - Fysetc Spider H7"
-#build_klipper config-spiderH7
-#flash_via_can 5fa18a5c2751
+sudo service klipper stop
+
+echo "Updating mcu - Fysetc Spider H7"
+build_klipper config-spiderH7
+flash_via_can 5fa18a5c2751
 
 #echo "Updating mcu - Creality V4.2.2"
 #build_klipper config-creality-v4
 #flash_via_serial /dev/serial/by-path/platform-xhci-hcd.0-usb-0:1:1.0-port0
 
-#echo "Updating mcu - Mellow Fly SHT36 V3"
-#build_klipper config-sht36-v3
-#flash_via_can bdcba9d5a55b
+echo "Updating mcu - Mellow Fly SHT36 V3"
+build_klipper config-sht36-v3
+flash_via_can bdcba9d5a55b
 #flash_via_can 270a34f9f254
 
-echo "Updating mcu - Linux process"
-build_klipper config-linux-process
+#echo "Updating mcu - Linux process"
+#build_klipper config-linux-process
+#flash_linux
 
-#sudo service klipper start
+sudo service klipper start
 
